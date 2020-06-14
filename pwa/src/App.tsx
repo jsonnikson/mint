@@ -1,21 +1,26 @@
 import React from 'react'
 import { WikipaliFrame } from './wikipali-frame'
-import { IntlProvider, FormattedMessage } from 'react-intl';
+import { IntlProvider, FormattedMessage, IntlConfig } from 'react-intl';
+import { UIState } from './ui-state';
+import { observer } from 'mobx-react'
 
-const en = require('./translations/en');
+const messagesForLocale = (locale: string): IntlConfig['messages'] => ({
+  en: require('./translations/en'),
+  zh: require('./translations/zh')
+}[locale] || {})
 
-const locale = 'en';
-const localeMessages = en;
+const uiState = new UIState()
 
 function App() {
   return (
-    <IntlProvider locale={locale}
-                  messages={localeMessages}>
-      <WikipaliFrame>
+    <IntlProvider locale={uiState.locale}
+                  messages={messagesForLocale(uiState.locale)}>
+      <WikipaliFrame locale={uiState.locale}
+                     onChangeLocale={value => uiState.locale = value}>
         <FormattedMessage id="hello-world" />
       </WikipaliFrame>
     </IntlProvider>
   );
 }
 
-export default App;
+export default observer(App);

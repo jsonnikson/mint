@@ -24,12 +24,15 @@ const ContentArea = styled('main')(({theme}) => ({
 }))
 
 export type WikipaliFrameProps = {
+  locale: string
+  onChangeLocale: (value: string) => void
   children: ReactNode
 }
 
 export function WikipaliFrame(props: WikipaliFrameProps) {
+  const { locale, onChangeLocale } = props
   return <StyledFrame>
-    <StyledTopbar userLoggedIn={false} />
+    <StyledTopbar userLoggedIn={false} {...{locale, onChangeLocale}} />
     <StyledDrawer variant="permanent">
       <Toolbar /> {/* padding */}
       <WikipaliNavbar />

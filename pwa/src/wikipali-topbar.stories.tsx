@@ -7,5 +7,5 @@ export default {
   component: WikipaliTopbar,
 };
 
-export const LoggedIn = () => <WikipaliTopbar userLoggedIn={true} />;
-export const LoggedOut = () => <WikipaliTopbar userLoggedIn={false} />;
+export const LoggedIn = () => <WikipaliTopbar locale="en" userLoggedIn={true} />;
+export const LoggedOut = () => <WikipaliTopbar locale="en" userLoggedIn={false} />;

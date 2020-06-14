@@ -1,4 +1,5 @@
 import React from 'react';
+import { action } from '@storybook/addon-actions';
 import { WikipaliFrame } from './wikipali-frame';
 import { FormattedMessage } from 'react-intl';
 
@@ -8,7 +9,8 @@ export default {
 };
 
 export const Basic = () => (
-    <WikipaliFrame>
+    <WikipaliFrame locale="en"
+                   onChangeLocale={action("change local")}>
         <FormattedMessage id="hello-world" />
     </WikipaliFrame>
 )
