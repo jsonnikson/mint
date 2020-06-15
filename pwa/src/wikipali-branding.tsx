@@ -1,6 +1,7 @@
 import React from 'react';
 import { styled, fade } from '@material-ui/core/styles';
-import wikipaliIconSrc from './wikipali-logo.svg';
+
+const wikipaliIconSrc = require('./wikipali-logo.svg')
 
 const WikipaliLogo = styled(() => <img src={wikipaliIconSrc} />)({
     height: '50px',
