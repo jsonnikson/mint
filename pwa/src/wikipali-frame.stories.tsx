@@ -10,7 +10,8 @@ export default {
 
 export const Basic = () => (
     <WikipaliFrame locale="en"
-                   onChangeLocale={action("change local")}>
+                   onChangeLocale={action("change local")}
+                   loggedInUser={null}>
         <FormattedMessage id="hello-world" />
     </WikipaliFrame>
 )

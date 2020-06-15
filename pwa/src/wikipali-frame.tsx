@@ -3,6 +3,7 @@ import {styled} from '@material-ui/core/styles';
 import { WikipaliTopbar } from './wikipali-topbar';
 import { WikipaliNavbar } from './wikipali-navbar';
 import {Drawer, Toolbar} from '@material-ui/core';
+import { LoggedInUser } from './logged-in-user';
 
 const StyledFrame = styled('div')({
   display: 'flex'
@@ -26,13 +27,14 @@ const ContentArea = styled('main')(({theme}) => ({
 export type WikipaliFrameProps = {
   locale: string
   onChangeLocale: (value: string) => void
+  loggedInUser: LoggedInUser|null
   children: ReactNode
 }
 
 export function WikipaliFrame(props: WikipaliFrameProps) {
-  const { locale, onChangeLocale } = props
+  const { locale, onChangeLocale, loggedInUser } = props
   return <StyledFrame>
-    <StyledTopbar userLoggedIn={false} {...{locale, onChangeLocale}} />
+    <StyledTopbar {...{locale, onChangeLocale, loggedInUser}} />
     <StyledDrawer variant="permanent">
       <Toolbar /> {/* padding */}
       <WikipaliNavbar />

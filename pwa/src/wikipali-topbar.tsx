@@ -14,6 +14,7 @@ import { WikipaliSearchBox } from './wikipali-searchbox';
 import { WikipaliBranding } from './wikipali-branding';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { supportedLocales } from './supported-locales';
+import { LoggedInUser } from './logged-in-user';
 
 const TopbarLeft = styled('div')({
   flex: "1", 
@@ -81,7 +82,11 @@ const LocaleMenu = (props: ILocaleMenuProps) => {
   )
 }
 
-const AccountMenu = () => {
+interface IAccountMenuProps {
+  loggedInUser: LoggedInUser
+}
+
+const AccountMenu = (props: IAccountMenuProps) => {
   const popupState = usePopupState({ variant: 'popover', popupId: 'demoMenu' })
   return (
     <div>
@@ -106,13 +111,13 @@ const AccountMenu = () => {
 }
 
 export type WikipaliTopbarProps = {
-  userLoggedIn: boolean
+  loggedInUser: LoggedInUser|null
   locale: string
   onChangeLocale?: (value: string) => void
 }
 
 export function WikipaliTopbar(props: WikipaliTopbarProps&AppBarProps) {
-  const {userLoggedIn, locale, onChangeLocale, ...appBarProps} = props;
+  const {loggedInUser, locale, onChangeLocale, ...appBarProps} = props;
   return (
     <AppBar position="fixed" {...appBarProps}>
       <Toolbar>
@@ -131,7 +136,7 @@ export function WikipaliTopbar(props: WikipaliTopbarProps&AppBarProps) {
         </TopbarCenter>
         <TopbarRight>
           <LocaleMenu {...{locale, onChangeLocale}}/>
-          {props.userLoggedIn ? <AccountMenu /> : <SignOutButton />}
+          {props.loggedInUser ? <AccountMenu loggedInUser={loggedInUser as LoggedInUser} /> : <SignOutButton />}
         </TopbarRight>
       </Toolbar>
     </AppBar>

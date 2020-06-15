@@ -16,7 +16,8 @@ function App() {
     <IntlProvider locale={uiState.locale}
                   messages={messagesForLocale(uiState.locale)}>
       <WikipaliFrame locale={uiState.locale}
-                     onChangeLocale={value => uiState.locale = value}>
+                     onChangeLocale={value => uiState.locale = value}
+                     loggedInUser={uiState.loggedInUser}>
         <FormattedMessage id="hello-world" />
       </WikipaliFrame>
     </IntlProvider>
