@@ -9,6 +9,7 @@ import ListItem from '@material-ui/core/ListItem';
 import {ListItemIcon as _ListItemIcon} from '@material-ui/core';
 import ListItemText from '@material-ui/core/ListItemText';
 import { useIntl } from 'react-intl';
+import useStyles from './styles'
 
 export type WikipaliNavbarProps = {
   onAddDocument?: () => void

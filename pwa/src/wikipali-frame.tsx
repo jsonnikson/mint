@@ -1,9 +1,10 @@
-import React, { ReactNode } from 'react';
-import { styled, Theme } from '@material-ui/core/styles';
+import React, { ReactNode, useState, useCallback } from 'react';
+import clsx from 'clsx'
 import { WikipaliTopbar } from './wikipali-topbar';
 import { WikipaliNavbar } from './wikipali-navbar';
-import {Drawer, Toolbar, Box, makeStyles} from '@material-ui/core';
+import {Drawer, Toolbar, Box} from '@material-ui/core';
 import { LoggedInUser } from './logged-in-user';
+import useStyles from './styles'
 
 export type WikipaliFrameProps = {
   locale: string
@@ -13,13 +14,18 @@ export type WikipaliFrameProps = {
 }
 
 export function WikipaliFrame(props: WikipaliFrameProps) {
+  const classes = useStyles()
   const { locale, onChangeLocale, loggedInUser } = props
+  const [navbarOpen, setIsNavbarOpen] = useState(false)
+  const onClickDrawerButton = useCallback(() => setIsNavbarOpen(x=>!x), [])
   return (
     <Box display="flex">
-      <WikipaliTopbar {...{locale, onChangeLocale, loggedInUser}} />
-      <Drawer variant="permanent">
+      <WikipaliTopbar {...{locale, onChangeLocale, onClickDrawerButton, loggedInUser}} />
+      <Drawer variant="permanent" className={clsx(classes.navbar, { [classes.navbarOpen]: navbarOpen })}>
         <Toolbar /> {/* padding */}
-        <WikipaliNavbar />
+        <Box>
+          <WikipaliNavbar  />
+        </Box>
       </Drawer>
       <Box flexGrow={1} p={3}>
         <Toolbar /> {/* padding */}

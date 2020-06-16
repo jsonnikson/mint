@@ -1,5 +1,4 @@
 import React from 'react';
-import { styled } from '@material-ui/core/styles';
 import { AppBar, AppBarProps, Button, Popper, Fade, Paper, Toolbar, IconButton, ClickAwayListener, MenuList, MenuItem, makeStyles, Box, useTheme } from '@material-ui/core';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -15,6 +14,7 @@ import { WikipaliBranding } from './wikipali-branding';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { supportedLocales } from './supported-locales';
 import { LoggedInUser } from './logged-in-user';
+import useStyles from './styles'
 
 const SignOutButton = () => {
   return (
@@ -96,34 +96,40 @@ export type WikipaliTopbarProps = {
   loggedInUser: LoggedInUser|null
   locale: string
   onChangeLocale?: (value: string) => void
+  onClickDrawerButton: () => void
 }
 
 export function WikipaliTopbar(props: WikipaliTopbarProps&AppBarProps) {
-  const theme = useTheme()
-  const {loggedInUser, locale, onChangeLocale, ...appBarProps} = props
+  const classes = useStyles()
+  const {
+    loggedInUser,
+    locale,
+    onChangeLocale,
+    onClickDrawerButton,
+    ...appBarProps} = props
   return (
-    <Box zIndex={theme.zIndex.drawer+1} clone>
-      <AppBar position="fixed" {...appBarProps}>
-        <Toolbar>
-          <Box display="flex" flex={1} justifyContent="flex-start" alignItems="center">
-            <IconButton
-              edge="start"
-              color="inherit"
-              aria-label="open drawer"
-            >
-              <MenuIcon />
-            </IconButton>
-            <WikipaliBranding />
-          </Box>
-          <Box alignItems="center">
-            <WikipaliSearchBox />
-          </Box>
-          <Box display="flex" flex={1} justifyContent="flex-end" alignItems="center">
-            <LocaleMenu {...{locale, onChangeLocale}}/>
-            {props.loggedInUser ? <AccountMenu loggedInUser={loggedInUser as LoggedInUser} /> : <SignOutButton />}
-          </Box>
-        </Toolbar>
-      </AppBar>
-    </Box>
+    <AppBar position="fixed" className={classes.topbar} {...appBarProps}>
+      <Toolbar>
+        <Box display="flex" flex={1} justifyContent="flex-start" alignItems="center">
+          <IconButton
+            edge="start"
+            color="inherit"
+            aria-label="open drawer"
+            className={classes.navbarButton}
+            onClick={onClickDrawerButton}
+          >
+            <MenuIcon />
+          </IconButton>
+          <WikipaliBranding />
+        </Box>
+        <Box alignItems="center">
+          <WikipaliSearchBox />
+        </Box>
+        <Box display="flex" flex={1} justifyContent="flex-end" alignItems="center">
+          <LocaleMenu {...{locale, onChangeLocale}}/>
+          {props.loggedInUser ? <AccountMenu loggedInUser={loggedInUser as LoggedInUser} /> : <SignOutButton />}
+        </Box>
+      </Toolbar>
+    </AppBar>
   );
 }
