@@ -12,9 +12,9 @@ import {
 import { WikipaliSearchBox } from './wikipali-searchbox';
 import { WikipaliBranding } from './wikipali-branding';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { supportedLocales } from './supported-locales';
-import { LoggedInUser } from './logged-in-user';
-import useStyles from './styles'
+import { supportedLocales } from '../lib/supported-locales';
+import { LoggedInUser } from '../lib/logged-in-user';
+import useStyles from '../styles/styles'
 
 const SignOutButton = () => {
   return (
@@ -96,7 +96,7 @@ export type WikipaliTopbarProps = {
   loggedInUser: LoggedInUser|null
   locale: string
   onChangeLocale?: (value: string) => void
-  onClickDrawerButton: () => void
+  onClickDrawerButton?: () => void
 }
 
 export function WikipaliTopbar(props: WikipaliTopbarProps&AppBarProps) {

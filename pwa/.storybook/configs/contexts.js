@@ -1,7 +1,7 @@
 import { IntlProvider } from 'react-intl';
 
-const en = require('../../src/translations/en')
-const zh = require('../../src/translations/zh')
+const en = require('../../lang/en')
+const zh = require('../../lang/zh')
 
 export const contexts = [
     {

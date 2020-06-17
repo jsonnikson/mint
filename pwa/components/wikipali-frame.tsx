@@ -3,8 +3,8 @@ import clsx from 'clsx'
 import { WikipaliTopbar } from './wikipali-topbar';
 import { WikipaliNavbar } from './wikipali-navbar';
 import {Drawer, Toolbar, Box} from '@material-ui/core';
-import { LoggedInUser } from './logged-in-user';
-import useStyles from './styles'
+import { LoggedInUser } from '../lib/logged-in-user';
+import useStyles from '../styles/styles'
 
 export type WikipaliFrameProps = {
   locale: string
