@@ -1,15 +1,7 @@
-import React from 'react';
-import {styled,Theme} from '@material-ui/core/styles';
-import List from '@material-ui/core/List';
-import AddCircleIcon from '@material-ui/icons/AddCircle';
-import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
-import GroupIcon from '@material-ui/icons/Group';
-import DeleteIcon from '@material-ui/icons/Delete'
-import ListItem from '@material-ui/core/ListItem';
-import {ListItemIcon as _ListItemIcon} from '@material-ui/core';
-import ListItemText from '@material-ui/core/ListItemText';
-import { useIntl } from 'react-intl';
-import useStyles from '../styles/styles'
+import React from 'react'
+import { List, ListItem, ListItemText, ListItemIcon } from '@material-ui/core'
+import { AddCircle as AddCircleIcon, LibraryBooks as LibraryBooksIcon, Group as GroupIcon, Delete as DeleteIcon } from '@material-ui/icons'
+import { useIntl } from 'react-intl'
 
 export type WikipaliNavbarProps = {
   onAddDocument?: () => void
@@ -18,30 +10,45 @@ export type WikipaliNavbarProps = {
   onTrash?: () => void
 }
 
-const ListItemIcon = styled(_ListItemIcon)(({theme}) => ({
-  color: 'inherit'
-}))
+type Link = {
+  id: string
+  icon: React.ElementType
+  onClick: keyof WikipaliNavbarProps
+}
+const links: Link[] = [
+  {
+    id: 'navbar.add-document',
+    icon: AddCircleIcon,
+    onClick: 'onAddDocument'
+  },
+  {
+    id: 'navbar.my-documents',
+    icon: LibraryBooksIcon,
+    onClick: 'onMyDocuments'
+  },
+  {
+    id: 'navbar.groups',
+    icon: GroupIcon,
+    onClick: 'onGroups'
+  },
+  {
+    id: 'navbar.trash',
+    icon: DeleteIcon,
+    onClick: 'onTrash'
+  }
+]
 
 export function WikipaliNavbar(props: WikipaliNavbarProps) {
   const intl = useIntl();
   return (
     <List>
-      <ListItem button onClick={props.onAddDocument}>
-        <ListItemIcon><AddCircleIcon /></ListItemIcon>
-        <ListItemText primary={intl.formatMessage({id: 'navbar.add-document'})} />
-      </ListItem>
-      <ListItem button onClick={props.onMyDocuments}>
-        <ListItemIcon><LibraryBooksIcon /></ListItemIcon>
-        <ListItemText primary={intl.formatMessage({id: 'navbar.my-documents'})} />
-      </ListItem>
-      <ListItem button onClick={props.onGroups}>
-        <ListItemIcon><GroupIcon /></ListItemIcon>
-        <ListItemText primary={intl.formatMessage({id: 'navbar.groups'})} />
-      </ListItem>
-      <ListItem button onClick={props.onTrash}>
-        <ListItemIcon><DeleteIcon /></ListItemIcon>
-        <ListItemText primary={intl.formatMessage({id: 'navbar.trash'})} />
-      </ListItem>
+      {links.map(link => (
+        <ListItem button onClick={props[link.onClick]}>
+          <ListItemIcon><link.icon /></ListItemIcon>
+          <ListItemText primary={intl.formatMessage({ id: link.id })} />
+        </ListItem>
+
+      ))}
     </List>
   );
 }
