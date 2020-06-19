@@ -14,7 +14,8 @@ export default typeStyles({
       padding: 0,
       textAlign: "inherit",
       font: 'inherit',
-      backgroundColor: 'inherit'
+      backgroundColor: 'inherit',
+      width: '100%'
     },
   },
   wordToken: {
