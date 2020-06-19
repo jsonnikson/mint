@@ -1,5 +1,4 @@
-import React, { useLayoutEffect } from 'react';
-import { styled } from '@material-ui/core/styles';
+import React from 'react';
 
 export type ButtonToInputProps = {
     children?: React.ReactNode
@@ -13,13 +12,15 @@ export type ButtonToInputProps = {
 export const ButtonToInput = (props: ButtonToInputProps) => {
     const containerRef = React.useRef<HTMLDivElement>(null);
     const buttonRef = React.useRef<HTMLButtonElement>(null);
-    const [isActive, _setIsActive] = React.useState(false);
+    const [isActive, setIsActive] = React.useState(false);
     const [transientValue, setTransientValue] = React.useState(props.value);
     const [width, setWidth] = React.useState<number>();
     React.useEffect(() => {
-        setTransientValue(props.value);
         setIsActive(false);
     }, [props.value])
+    React.useEffect(() => {
+        setTransientValue(props.value)
+    }, [isActive])
     React.useEffect(() => {
         if (!isActive) setWidth(buttonRef.current?.getBoundingClientRect().width)
     }, [isActive]);
@@ -51,22 +52,16 @@ export const ButtonToInput = (props: ButtonToInputProps) => {
             setIsActive(false);
         }
         else if (ev.key === 'Escape') {
-            setTransientValue(props.value);
             setIsActive(false);
         }
     }
-    function setIsActive(isActive: boolean){
-        _setIsActive(isActive);
-        if (props.onIsActive) props.onIsActive(isActive);
-    }
     function onBlur(this: Document, ev: React.FocusEvent) {
-        if (!containerRef.current?.contains(ev.relatedTarget as Node)) {
-            // setTimeout(function(){
-                if (props.onChange && props.value != transientValue) {
-                    props.onChange(transientValue)
-                }
-                setIsActive(false);
-            // }, 100)
+        const focusInContainer = containerRef.current?.contains(ev.relatedTarget as Node)
+        if (!focusInContainer) {
+            if (props.onChange && props.value != transientValue) {
+                props.onChange(transientValue)
+            }
+            setIsActive(false);
         }
     }
 }

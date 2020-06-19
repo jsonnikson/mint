@@ -2,7 +2,7 @@ import React from 'react';
 import { Word, Block, WikipaliDocument, Punctuation } from '../../lib/wikipali-document'
 import { GlossInput } from './gloss-input'
 import { WordAnalysisComponent, BlockView, PunctuationAnalysisComponent, DocumentEditor } from './document-editor.views';
-import { observable, computed } from 'mobx'
+import { observable, computed, action } from 'mobx'
 import { createObserver } from '../../lib/utils';
 
 const getGlossSuggestions = (word: string) => []
@@ -51,9 +51,9 @@ export class DocumentEditorController {
             })
         }
         function renderGlossInput(word: Word) {
-            const onChange = (value: string) => {
+            const onChange = action((value: string) => {
                 word.analysis.gloss = value;
-            }
+            })
             return () => createObserver(GlossInput, () => ({
                 gloss: word.analysis.gloss,
                 onChange,
@@ -71,7 +71,7 @@ export class DocumentEditorController {
             return React.createElement('div');
         }
 
-        return React.createElement(DocumentEditor, { doc, renderBlock })
+        return React.createElement(DocumentEditor, { doc:state.loadedDocument, renderBlock })
     }
 
 }
