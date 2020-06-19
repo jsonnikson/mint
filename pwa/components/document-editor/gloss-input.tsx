@@ -29,13 +29,11 @@ const PopupBox = (props: HTMLAttributes<HTMLDivElement>) => {
 }
 
 export const GlossInput = (props: GlossInputProps) => {
-    if (props.suggestions) console.log(props.suggestions);
     const [isActive, setIsActive] = useState(false)
     const onSelect = (value: string) => {
         setIsActive(false);
         if (props.onChange) props.onChange(value);
     }
-    console.log(isActive, props.suggestions)
     return (
         <ButtonToInput
             value={props.gloss}
