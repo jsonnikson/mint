@@ -1,30 +1,56 @@
-import React from 'react'
+import "reflect-metadata"
+
+import React, { ReactElement } from 'react'
 import ReactDOM from 'react-dom';
-import { IntlProvider, IntlConfig } from 'react-intl';
+import { IntlProvider } from 'react-intl';
 import { UIState } from '../lib/ui-state';
 import { observer } from 'mobx-react'
-import Home from './index'
 
-const messagesForLocale = (locale: string): IntlConfig['messages'] => ({
-  en: require('../lang/en'),
-  zh: require('../lang/zh')
-}[locale] || {})
+import {container, injectable} from "tsyringe";
+import { ISupportedLocale, SupportedLocales } from '../lib/supported-locales';
+import { computed, autorun } from 'mobx';
+import { createObserver } from "../lib/utils";
+import { HomeController } from "./index";
 
-const App = observer((props: {uiState: UIState}) => {
-  const { uiState } = props
+interface IAppViewProps {
+  locale: string
+  messages: ISupportedLocale['messages'],
+  render: () => ReactElement
+}
+
+const AppView = observer((props: IAppViewProps) => {
+  const { locale, messages, render } = props
   return (
-    <IntlProvider locale={uiState.locale}
-                  messages={messagesForLocale(uiState.locale)}>
-      <Home uiState={uiState} />
+    <IntlProvider {...{locale, messages}}>
+      {render()}
     </IntlProvider>
   );
 })
 
-const uiState = new UIState()
+@injectable()
+class AppController {
+  constructor(
+    private supportedLocales: SupportedLocales,
+    private homeController: HomeController,
+    private uiState: UIState
+  ) {}
+  render() {
+    return createObserver(AppView, () => ({
+      locale: this.uiState.locale,
+      messages: computed(() => this.supportedLocales.messagesForLocale(this.uiState.locale)).get(),
+      render: () => this.homeController.render()
+    }))
+  }
+}
+
+const uiState = container.resolve(UIState)
+const appController = container.resolve(AppController)
+
+autorun(() => console.log('locale',uiState.locale))
 
 ReactDOM.render(
   <React.StrictMode>
-    <App uiState={uiState} />
+    {appController.render()}
   </React.StrictMode>,
   document.getElementById('root')
 );

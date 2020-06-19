@@ -1,11 +1,10 @@
 import React from 'react';
-import { WikipaliFrame } from '../application-frame/wikipali-frame';
 import { MyDocumentsView, IMyDocumentsProps } from './my-documents';
 import { action } from '@storybook/addon-actions';
 
 export default {
   title: 'My Documents',
-  component: WikipaliFrame,
+  component: MyDocumentsView,
 };
 
 const props: IMyDocumentsProps = {

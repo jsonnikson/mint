@@ -1,17 +1,17 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import { WikipaliFrame } from './wikipali-frame';
+import { WikipaliFrameView } from './wikipali-frame.views';
 import { FormattedMessage } from 'react-intl';
 
 export default {
   title: 'Application Frame',
-  component: WikipaliFrame,
+  component: WikipaliFrameView,
 };
 
 export const Basic = () => (
-    <WikipaliFrame locale="en"
-                   onChangeLocale={action("change local")}
-                   loggedInUser={null}>
+    <WikipaliFrameView locale="en"
+                       onChangeLocale={action("change local")}
+                       loggedInUser={null}>
         <FormattedMessage id="hello-world" />
-    </WikipaliFrame>
+    </WikipaliFrameView>
 )

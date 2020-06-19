@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { DocumentEditorController } from './document-editor.controller';
-
+import { container } from 'tsyringe'
 const testDoc = require('../../data/sassatavado.json')
 
 export default {
@@ -8,5 +8,5 @@ export default {
 };
 
 export const Basic = () => {
-  return new DocumentEditorController().render(testDoc);
+  return container.resolve(DocumentEditorController).render(testDoc);
 };

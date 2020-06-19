@@ -6,14 +6,14 @@ import {Drawer, Toolbar, Box} from '@material-ui/core';
 import { LoggedInUser } from '../../lib/logged-in-user';
 import useStyles from './wikipali-frame.styles'
 
-export type WikipaliFrameProps = {
+export type WikipaliFrameViewProps = {
   locale: string
   onChangeLocale: (value: string) => void
   loggedInUser: LoggedInUser|null
   children: ReactNode
 }
 
-export function WikipaliFrame(props: WikipaliFrameProps) {
+export function WikipaliFrameView(props: WikipaliFrameViewProps) {
   const classes = useStyles()
   const { locale, onChangeLocale, loggedInUser } = props
   const [navbarOpen, setIsNavbarOpen] = useState(false)

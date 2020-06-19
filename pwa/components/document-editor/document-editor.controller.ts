@@ -4,12 +4,13 @@ import { GlossInput } from './gloss-input'
 import { WordAnalysisComponent, BlockView, PunctuationAnalysisComponent, DocumentEditor } from './document-editor.views';
 import { observable, computed, action } from 'mobx'
 import { createObserver } from '../../lib/utils';
+import { injectable } from 'tsyringe';
 
 const getGlossSuggestions = (word: string) => []
 
+@injectable()
 export class DocumentEditorController {
     render(doc: WikipaliDocument) {
-        
         const state = observable({
             selectedWordId: null as string|null,
             loadedDocument: doc,

@@ -13,12 +13,15 @@
     "@types/react": "^16.9.36",
     "@types/react-dom": "^16.9.8",
     "clsx": "^1.1.1",
+    "lib": "^4.2.0",
     "material-ui-popup-state": "^1.5.4",
     "mobx": "^5.15.4",
     "mobx-react": "^6.2.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-intl": "^4.6.9",
+    "reflect-metadata": "^0.1.13",
+    "tsyringe": "^4.3.0",
     "typescript": "^3.9.5"
   },
   "devDependencies": {

@@ -1,16 +1,16 @@
 import React from 'react'
 import { FormattedMessage } from 'react-intl';
-import { WikipaliFrame } from '../components/application-frame/wikipali-frame';
-import { UIState } from '../lib/ui-state';
+import { WikipaliFrameController } from '../components/application-frame/wikipali-frame.controller';
+import { injectable } from 'tsyringe';
 
-export default (props: {uiState: UIState}) => {
-    const {uiState} = props
-    return (
-        <WikipaliFrame locale={uiState.locale}
-        onChangeLocale={value => uiState.locale = value}
-        loggedInUser={uiState.loggedInUser}>
+@injectable()
+export class HomeController {
+    constructor(
+        private frameController: WikipaliFrameController
+    ) {}
+    render() {
+        return this.frameController.render(
             <FormattedMessage id="hello-world" />
-        </WikipaliFrame>
-    )
+        )
+    }
 }
-
