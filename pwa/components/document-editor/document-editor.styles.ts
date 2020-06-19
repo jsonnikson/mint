@@ -1,10 +1,6 @@
 import { typeStyles } from "../../lib/utils";
 
 export default typeStyles({
-  blockContainer: {
-    display: "flex",
-    flexWrap: "wrap",
-  },
   tokenContainer: {
     display: "inline-flex",
     flexDirection: "column",

@@ -1,7 +1,7 @@
 import React, { ReactElement, HTMLAttributes } from 'react';
 import { Block, Punctuation, Word, WikipaliDocument } from '../../lib/wikipali-document';
 import styles from './document-editor.styles'
-import { makeStyles } from '@material-ui/core';
+import { makeStyles, Box } from '@material-ui/core';
 import clsx from 'clsx';
 
 const useStyles = makeStyles(styles);
@@ -24,14 +24,13 @@ export type BlockViewProps = {
 }
 
 export const BlockView = (props: BlockViewProps) => {
-    const classes = useStyles();
     return (
-        <div className={classes.blockContainer}>
+        <Box display="flex" flexWrap="wrap">
             {props.block.tokens.map(token => {
                 if (token.punc) return props.renderPunctuation(token.punc);
                 else if (token.word) return props.renderWord(token.word);
             })}
-        </div>
+        </Box>
     ) 
 }
 
