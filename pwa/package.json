@@ -29,8 +29,10 @@
     "@storybook/addon-links": "^5.3.19",
     "@storybook/addons": "^5.3.19",
     "@storybook/react": "^5.3.19",
+    "@types/jsdom": "^16.2.3",
     "babel-loader": "^8.1.0",
     "babel-preset-react-app": "^9.1.2",
+    "jsdom": "^16.2.2",
     "parcel-bundler": "^1.12.4"
   }
 }
