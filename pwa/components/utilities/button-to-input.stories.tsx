@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { ButtonToInput } from './button-to-input';
 
 export default {
-  title: 'Utility Components/Button To Input',
+  title: 'Utility Components/Button-to-Input',
   component: ButtonToInput,
 };
 

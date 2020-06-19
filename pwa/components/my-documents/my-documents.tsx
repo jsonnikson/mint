@@ -2,8 +2,8 @@ import React from 'react'
 import { Box, Link, List, ListItem, ListSubheader, ListItemIcon, ListItemText } from '@material-ui/core'
 import { Folder as FolderIcon, Description as DocumentIcon, ChevronRight as ChevronRightIcon } from '@material-ui/icons'
 import { FormattedMessage, useIntl } from 'react-intl'
-import { UserDocumentStat, UserDocumentId } from '../lib/user-document'
-import { UserFolderStat } from '../lib/user-folders'
+import { UserDocumentStat, UserDocumentId } from '../../lib/user-document'
+import { UserFolderStat } from '../../lib/user-folders'
 
 export interface IMyDocumentsProps {
     path: string

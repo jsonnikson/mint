@@ -1,7 +1,7 @@
 import React from 'react';
 import { Typography } from '@material-ui/core';
 
-const wikipaliIconSrc = require('../public/wikipali-logo.svg')
+const wikipaliIconSrc = require('../../public/wikipali-logo.svg')
 
 export const WikipaliBranding = () => (
     <>

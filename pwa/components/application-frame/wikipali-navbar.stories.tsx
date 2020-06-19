@@ -3,7 +3,7 @@ import {WikipaliNavbar} from './wikipali-navbar';
 import { action } from '@storybook/addon-actions';
 
 export default {
-  title: 'Navbar',
+  title: 'Application Frame/Navigation Bar',
   component: WikipaliNavbar,
 };
 

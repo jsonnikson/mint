@@ -2,7 +2,7 @@ import React from 'react';
 import { InputBase, Box } from "@material-ui/core";
 import { Search as SearchIcon } from '@material-ui/icons';
 import { useIntl } from 'react-intl';
-import useStyles from '../styles/styles'
+import useStyles from './wikipali-frame.styles'
 
 export const WikipaliSearchBox = () => {
     const intl = useIntl()

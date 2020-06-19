@@ -4,7 +4,7 @@ import { WikipaliFrame } from './wikipali-frame';
 import { FormattedMessage } from 'react-intl';
 
 export default {
-  title: 'Frame',
+  title: 'Application Frame',
   component: WikipaliFrame,
 };
 

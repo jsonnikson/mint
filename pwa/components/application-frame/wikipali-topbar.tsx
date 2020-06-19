@@ -10,11 +10,11 @@ import {
   bindPopper,
 } from 'material-ui-popup-state/hooks'
 import { WikipaliSearchBox } from './wikipali-searchbox';
-import { WikipaliBranding } from './wikipali-branding';
+import { WikipaliBranding } from '../theme/wikipali-branding';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { supportedLocales } from '../lib/supported-locales';
-import { LoggedInUser } from '../lib/logged-in-user';
-import useStyles from '../styles/styles'
+import { supportedLocales } from '../../lib/supported-locales';
+import { LoggedInUser } from '../../lib/logged-in-user';
+import useStyles from './wikipali-frame.styles'
 
 const SignOutButton = () => {
   return (

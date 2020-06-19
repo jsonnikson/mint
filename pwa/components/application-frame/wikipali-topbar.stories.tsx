@@ -3,7 +3,7 @@ import {WikipaliTopbar} from './wikipali-topbar';
 import { action } from '@storybook/addon-actions';
 
 export default {
-  title: 'Main Topbar',
+  title: 'Application Frame/Topbar',
   component: WikipaliTopbar,
 };
 

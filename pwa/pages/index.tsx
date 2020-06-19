@@ -1,6 +1,6 @@
 import React from 'react'
 import { FormattedMessage } from 'react-intl';
-import { WikipaliFrame } from '../components/wikipali-frame';
+import { WikipaliFrame } from '../components/application-frame/wikipali-frame';
 import { UIState } from '../lib/ui-state';
 
 export default (props: {uiState: UIState}) => {

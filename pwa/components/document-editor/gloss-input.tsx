@@ -1,5 +1,5 @@
 import React, { useState, HTMLAttributes } from 'react';
-import { ButtonToInput } from '../button-to-input';
+import { ButtonToInput } from '../utilities/button-to-input';
 import { GlossSuggestions } from './gloss-suggestions';
 import { GlossSuggestion } from '../../lib/autosuggest';
 
