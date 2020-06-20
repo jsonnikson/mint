@@ -6,10 +6,12 @@ import { IntlProvider } from 'react-intl';
 import { UIState } from '../lib/ui-state';
 import { Observer } from 'mobx-react'
 
-import {container, injectable} from "tsyringe";
+import {container, injectable, inject} from "tsyringe";
 import { ISupportedLocale, SupportedLocales } from '../lib/supported-locales';
 import { computed, autorun } from 'mobx';
 import { HomeController } from "./index";
+import { Theme, ThemeProvider } from '@material-ui/core';
+import '../lib/theme'
 
 interface IAppViewProps {
   locale: string
@@ -31,15 +33,19 @@ class AppController {
   constructor(
     private supportedLocales: SupportedLocales,
     private homeController: HomeController,
-    private uiState: UIState
+    private uiState: UIState,
+    @inject('Theme') private theme: Theme
+
   ) {}
   render = () => (
     <Observer render={() =>
-      <AppView
-        locale={this.uiState.locale} 
-        messages={this.messagesForLocale} 
-        render={() => this.homeController.render()} 
-      />
+      <ThemeProvider theme={this.theme}>
+        <AppView
+          locale={this.uiState.locale} 
+          messages={this.messagesForLocale} 
+          render={() => this.homeController.render()} 
+        />
+      </ThemeProvider>
     } />
   )
   @computed private get messagesForLocale() {
