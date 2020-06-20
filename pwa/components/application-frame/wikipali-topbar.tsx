@@ -12,7 +12,7 @@ import {
 import { WikipaliSearchBox } from './wikipali-searchbox';
 import { WikipaliBranding } from '../theme/wikipali-branding';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { supportedLocales } from '../../lib/supported-locales';
+import { ISupportedLocale, SupportedLocales } from '../../lib/supported-locales';
 import { LoggedInUser } from '../../lib/logged-in-user';
 import useStyles from './wikipali-frame.styles'
 
@@ -26,12 +26,13 @@ const SignOutButton = () => {
 
 interface ILocaleMenuProps {
   locale: string
+  supportedLocales: ISupportedLocale[]
   onChangeLocale?: (value: string) => void
 }
 
 const LocaleMenu = (props: ILocaleMenuProps) => {
   const intl = useIntl()
-  const { locale, onChangeLocale } = props
+  const { locale, supportedLocales, onChangeLocale } = props
   const popupState = usePopupState({ variant: 'popover', popupId: 'localeMenu' })
   function selectLocale(locale: string) {
     if (onChangeLocale) onChangeLocale(locale)
@@ -95,6 +96,7 @@ const AccountMenu = (props: IAccountMenuProps) => {
 export type WikipaliTopbarProps = {
   loggedInUser: LoggedInUser|null
   locale: string
+  supportedLocales: ISupportedLocale[]
   onChangeLocale?: (value: string) => void
   onClickDrawerButton?: () => void
 }
@@ -104,6 +106,7 @@ export function WikipaliTopbar(props: WikipaliTopbarProps&AppBarProps) {
   const {
     loggedInUser,
     locale,
+    supportedLocales,
     onChangeLocale,
     onClickDrawerButton,
     ...appBarProps} = props
@@ -126,7 +129,7 @@ export function WikipaliTopbar(props: WikipaliTopbarProps&AppBarProps) {
           <WikipaliSearchBox />
         </Box>
         <Box display="flex" flex={1} justifyContent="flex-end" alignItems="center">
-          <LocaleMenu {...{locale, onChangeLocale}}/>
+          <LocaleMenu {...{locale, supportedLocales, onChangeLocale}}/>
           {props.loggedInUser ? <AccountMenu loggedInUser={loggedInUser as LoggedInUser} /> : <SignOutButton />}
         </Box>
       </Toolbar>

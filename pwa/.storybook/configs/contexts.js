@@ -1,7 +1,8 @@
 import { IntlProvider } from 'react-intl';
+import { SupportedLocales } from '../../lib/supported-locales';
+import { container } from 'tsyringe'
 
-const en = require('../../lang/en')
-const zh = require('../../lang/zh')
+const supportedLocales = container.resolve(SupportedLocales)
 
 export const contexts = [
     {
@@ -10,10 +11,13 @@ export const contexts = [
         components: [
             IntlProvider
         ],
-        params: [
-            { name: 'en', props: { locale: 'en', messages: en }},
-            { name: 'zh', props: { locale: 'zh', messages: zh }},
-        ]
+        params: supportedLocales.locales.map(locale => ({
+            name: locale.locale,
+            props: {
+                locale: locale.locale,
+                messages: supportedLocales.messagesForLocale(locale.locale)
+            },
+        }))
     },
   ];
   

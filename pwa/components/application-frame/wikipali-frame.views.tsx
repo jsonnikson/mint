@@ -5,9 +5,11 @@ import { WikipaliNavbar } from './wikipali-navbar';
 import {Drawer, Toolbar, Box} from '@material-ui/core';
 import { LoggedInUser } from '../../lib/logged-in-user';
 import useStyles from './wikipali-frame.styles'
+import { ISupportedLocale } from '../../lib/supported-locales';
 
 export type WikipaliFrameViewProps = {
   locale: string
+  supportedLocales: ISupportedLocale[]
   onChangeLocale: (value: string) => void
   loggedInUser: LoggedInUser|null
   children: ReactNode
@@ -15,12 +17,12 @@ export type WikipaliFrameViewProps = {
 
 export function WikipaliFrameView(props: WikipaliFrameViewProps) {
   const classes = useStyles()
-  const { locale, onChangeLocale, loggedInUser } = props
+  const { locale, supportedLocales, onChangeLocale, loggedInUser } = props
   const [navbarOpen, setIsNavbarOpen] = useState(false)
   const onClickDrawerButton = useCallback(() => setIsNavbarOpen(x=>!x), [])
   return (
     <Box display="flex">
-      <WikipaliTopbar {...{locale, onChangeLocale, onClickDrawerButton, loggedInUser}} />
+      <WikipaliTopbar {...{locale, supportedLocales, onChangeLocale, onClickDrawerButton, loggedInUser}} />
       <Drawer variant="permanent" className={clsx(classes.navbar, { [classes.navbarOpen]: navbarOpen })}>
         <Toolbar /> {/* padding */}
         <Box>
