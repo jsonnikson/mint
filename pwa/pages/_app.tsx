@@ -1,32 +1,17 @@
 import "reflect-metadata"
 
-import React, { ReactElement } from 'react'
+import React from 'react'
 import ReactDOM from 'react-dom';
 import { IntlProvider } from 'react-intl';
 import { UIState } from '../lib/ui-state';
 import { Observer } from 'mobx-react'
 
 import {container, injectable, inject} from "tsyringe";
-import { ISupportedLocale, SupportedLocales } from '../lib/supported-locales';
+import { SupportedLocales } from '../lib/supported-locales';
 import { computed, autorun } from 'mobx';
 import { HomeController } from "./index";
 import { Theme, ThemeProvider } from '@material-ui/core';
 import '../lib/theme'
-
-interface IAppViewProps {
-  locale: string
-  messages: ISupportedLocale['messages'],
-  render: () => ReactElement
-}
-
-const AppView = (props: IAppViewProps) => {
-  const { locale, messages, render } = props
-  return (
-    <IntlProvider {...{locale, messages}}>
-      {render()}
-    </IntlProvider>
-  );
-}
 
 @injectable()
 class AppController {
@@ -39,13 +24,13 @@ class AppController {
   ) {}
   render = () => (
     <Observer render={() =>
-      <ThemeProvider theme={this.theme}>
-        <AppView
-          locale={this.uiState.locale} 
-          messages={this.messagesForLocale} 
-          render={() => this.homeController.render()} 
-        />
-      </ThemeProvider>
+      <IntlProvider
+      locale={this.uiState.locale} 
+      messages={this.messagesForLocale}>
+        <ThemeProvider theme={this.theme}>
+          {this.homeController.render()}
+        </ThemeProvider>
+      </IntlProvider>
     } />
   )
   @computed private get messagesForLocale() {
