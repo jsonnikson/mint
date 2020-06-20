@@ -31,8 +31,8 @@ interface ILocaleMenuProps {
 }
 
 const LocaleMenu = (props: ILocaleMenuProps) => {
-  const intl = useIntl()
   const { locale, supportedLocales, onChangeLocale } = props
+  const currentLocaleName = supportedLocales.find(x=>x.locale===locale)?.text
   const popupState = usePopupState({ variant: 'popover', popupId: 'localeMenu' })
   function selectLocale(locale: string) {
     if (onChangeLocale) onChangeLocale(locale)
@@ -42,7 +42,7 @@ const LocaleMenu = (props: ILocaleMenuProps) => {
     <div>
       <Button color="inherit" {...bindTrigger(popupState)}>
         <LanguageIcon />
-        {intl.formatDisplayName(locale)}
+        {currentLocaleName}
         <ExpandMoreIcon fontSize="small" />
       </Button>
 
