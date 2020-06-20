@@ -1,27 +1,27 @@
 import React from 'react';
 import { UIState } from '../../lib/ui-state';
 import { injectable } from 'tsyringe';
-import { createObserver } from '../../lib/utils';
 import { WikipaliFrameView } from './wikipali-frame.views';
+import { action } from 'mobx';
+import { Observer } from 'mobx-react';
 
 @injectable()
 export class WikipaliFrameController {
   constructor(
     private uiState: UIState
   ) {}
-  render(children: React.ReactNode) {
-    const {
-      locale,
-      loggedInUser
-    } = this.uiState
-    return createObserver(WikipaliFrameView, () => ({
-      locale,
-      onChangeLocale: locale => {
-        this.uiState.locale = locale
-      },
-      loggedInUser,
-      children
-    }))
+  render = (children: React.ReactNode) => (
+    <Observer render={() =>
+      <WikipaliFrameView
+      locale={this.uiState.locale}
+      loggedInUser={this.uiState.loggedInUser}
+      onChangeLocale={this.onChangeLocale}
+      children={children} />
+    } />
+  )
+  @action.bound
+  private onChangeLocale(locale: string) {
+    this.uiState.locale = locale
   }
 }
 
