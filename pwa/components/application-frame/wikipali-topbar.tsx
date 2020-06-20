@@ -53,7 +53,7 @@ const LocaleMenu = (props: ILocaleMenuProps) => {
               <ClickAwayListener onClickAway={popupState.close}>
                 <MenuList>
                   {supportedLocales.map(locale => (
-                    <MenuItem onClick={() => selectLocale(locale.locale)}>{locale.text}</MenuItem>
+                    <MenuItem key={locale.locale} onClick={() => selectLocale(locale.locale)}>{locale.text}</MenuItem>
                   ))}
                 </MenuList>
               </ClickAwayListener>
