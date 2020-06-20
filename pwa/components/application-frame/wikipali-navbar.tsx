@@ -43,7 +43,7 @@ export function WikipaliNavbar(props: WikipaliNavbarProps) {
   return (
     <List>
       {links.map(link => (
-        <ListItem button onClick={props[link.onClick]}>
+        <ListItem key={link.id} button onClick={props[link.onClick]}>
           <ListItemIcon><link.icon /></ListItemIcon>
           <ListItemText primary={intl.formatMessage({ id: link.id })} />
         </ListItem>
