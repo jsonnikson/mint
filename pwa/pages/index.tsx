@@ -1,7 +1,7 @@
 import React from 'react'
 import { FormattedMessage } from 'react-intl';
 import { WikipaliFrameController } from '../components/application-frame/wikipali-frame.controller';
-import { injectable } from 'tsyringe';
+import { injectable, container } from 'tsyringe';
 
 @injectable()
 export class HomeController {
@@ -12,5 +12,13 @@ export class HomeController {
         return this.frameController.render(
             <FormattedMessage id="hello-world" />
         )
+    }
+}
+
+export default container.resolve(HomeController).render
+
+export async function getServerSideProps(context) {
+    return {
+        props: {}
     }
 }
